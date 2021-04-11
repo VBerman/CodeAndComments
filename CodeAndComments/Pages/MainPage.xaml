@@ -26,6 +26,7 @@
             <TextBox Margin="10 0 0 0" Width="125" Text="{Binding CurrentProject.Address}"  Height="20"/>
             <Button Width="20" Height="20" Background="White" Command="{Binding ChooseProject}">...</Button>
             <Button Margin="15 0 0 0" Command="{Binding OpenChooseFilesWindow}">Select specific files</Button>
+            <!--<Button Margin="15 0 0 0" Click="Button_Click">Select specific files</Button>-->
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" >
             <TextBlock Text="Result:"/>

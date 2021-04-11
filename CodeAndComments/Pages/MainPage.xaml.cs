@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodeAndComments.Models;
+using CodeAndComments.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,12 @@ namespace CodeAndComments.Pages
         {
             InitializeComponent();
         }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var chooseFilesWindow = new ChooseFilesWindow((ApplicationViewModel)DataContext);
+        //    chooseFilesWindow.Show();
+            
+        //}
     }
 }

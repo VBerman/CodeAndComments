@@ -48,6 +48,7 @@ namespace CodeAndComments.Models
             FileList.Clear();
             foreach (var fileName in Directory.GetFiles(address))
             {
+                //need remove and fix choose files window
                 if (fileName.EndsWith(".cs"))
                 {
                     FileList.Add(new FileStorage() { CurrentFile = fileName });

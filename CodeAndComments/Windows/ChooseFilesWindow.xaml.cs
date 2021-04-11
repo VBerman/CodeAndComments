@@ -26,5 +26,11 @@ namespace CodeAndComments.Windows
             InitializeComponent();
             DataContext = applicationViewModel;
         }
+
+    
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

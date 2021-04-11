@@ -57,6 +57,7 @@ namespace CodeAndComments.Models
                     ));
             }
             
+            
         }
 
         private RelayCommand openChooseFilesWindow;
@@ -69,14 +70,18 @@ namespace CodeAndComments.Models
                     (openChooseFilesWindow = new RelayCommand(obj =>
                     {
                         var chooseFilesWindow = new ChooseFilesWindow(this);
-                        chooseFilesWindow.Show();
+                        if (chooseFilesWindow.ShowDialog() ?? false)
+                        {
+                            var newApplicationViewModel = (ApplicationViewModel)chooseFilesWindow.DataContext;
+                            CurrentProject = newApplicationViewModel.CurrentProject;
+                        }
                     }
                     ));
             }
 
         }
 
-        public bool? DialogResult { get; private set; }
+ 
 
         
 
