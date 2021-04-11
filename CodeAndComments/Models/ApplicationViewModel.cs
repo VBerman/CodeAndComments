@@ -69,12 +69,8 @@ namespace CodeAndComments.Models
                 return openChooseFilesWindow ??
                     (openChooseFilesWindow = new RelayCommand(obj =>
                     {
-                        var chooseFilesWindow = new ChooseFilesWindow(this);
-                        if (chooseFilesWindow.ShowDialog() ?? false)
-                        {
-                            var newApplicationViewModel = (ApplicationViewModel)chooseFilesWindow.DataContext;
-                            CurrentProject = newApplicationViewModel.CurrentProject;
-                        }
+                        new ChooseFilesWindow().Show();
+                        
                     }
                     ));
             }

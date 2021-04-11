@@ -21,16 +21,13 @@ namespace CodeAndComments.Windows
     /// </summary>
     public partial class ChooseFilesWindow : Window
     {
-        public ChooseFilesWindow(ApplicationViewModel applicationViewModel)
+        public ChooseFilesWindow()
         {
             InitializeComponent();
-            DataContext = applicationViewModel;
+           
         }
 
     
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DialogResult = true;
-        }
+        
     }
 }
