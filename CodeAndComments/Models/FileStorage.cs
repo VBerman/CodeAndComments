@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeAndComments.Models
 {
-    class FileStorage : ObservableObject
+    public class FileStorage : ObservableObject
     {
 
         public FileStorage()

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CodeAndComments.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,10 @@ namespace CodeAndComments.Windows
     /// </summary>
     public partial class ChooseFilesWindow : Window
     {
-        public ChooseFilesWindow()
+        public ChooseFilesWindow(ApplicationViewModel applicationViewModel)
         {
             InitializeComponent();
+            DataContext = applicationViewModel;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CodeAndComments.Classes;
+using CodeAndComments.Windows;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CodeAndComments.Models
 {
-    class ApplicationViewModel : ObservableObject
+    public class ApplicationViewModel : ObservableObject
     {
 
         
@@ -58,6 +59,26 @@ namespace CodeAndComments.Models
             
         }
 
+        private RelayCommand openChooseFilesWindow;
+
+        public RelayCommand OpenChooseFilesWindow
+        {
+            get
+            {
+                return openChooseFilesWindow ??
+                    (openChooseFilesWindow = new RelayCommand(obj =>
+                    {
+                        var chooseFilesWindow = new ChooseFilesWindow(this);
+                        chooseFilesWindow.Show();
+                    }
+                    ));
+            }
+
+        }
+
         public bool? DialogResult { get; private set; }
+
+        
+
     }
 }

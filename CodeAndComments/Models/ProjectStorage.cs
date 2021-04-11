@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CodeAndComments.Models
 {
-    class ProjectStorage : ObservableObject
+    public class ProjectStorage : ObservableObject
     {
         public ProjectStorage()
         {
@@ -48,7 +48,11 @@ namespace CodeAndComments.Models
             FileList.Clear();
             foreach (var fileName in Directory.GetFiles(address))
             {
-                FileList.Add(new FileStorage() { CurrentFile = address });
+                if (fileName.EndsWith(".cs"))
+                {
+                    FileList.Add(new FileStorage() { CurrentFile = fileName });
+                }
+                
             }
         }
 
