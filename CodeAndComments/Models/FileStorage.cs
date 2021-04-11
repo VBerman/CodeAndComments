@@ -38,5 +38,24 @@ namespace CodeAndComments.Models
             }
         }
 
+        private RelayCommand changeState;
+
+        public RelayCommand ChangeState
+        {
+            get 
+            {
+                return changeState ??
+                    (changeState = new RelayCommand(obj => 
+                    {                        
+                        IsCurrent = !IsCurrent; 
+
+                    }
+                    )); 
+            }
+            
+        }
+
+
+
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace CodeAndComments.Classes
 {
-    class RelayAsyncCommand : IAsyncCommand
+    public class RelayAsyncCommand : IAsyncCommand
     {
         private Func<object, Task> execute;
         private Func<object, bool> canExecute;

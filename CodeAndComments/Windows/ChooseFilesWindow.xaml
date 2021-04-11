@@ -8,18 +8,18 @@
         Title="ChooseFilesWindow" Height="450" Width="800" 
         xmlns:classes="clr-namespace:CodeAndComments.Classes"
         DataContext="{Binding Source={x:Static classes:ViewModel.Instance}}">
-    <!--<Window.DataContext>
-        <models:ApplicationViewModel></models:ApplicationViewModel>
-    </Window.DataContext>-->
+    
     <Grid>
-        <DataGrid ColumnWidth="*" ItemsSource="{Binding CurrentProject.FileList}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid ColumnWidth="*" ItemsSource="{Binding CurrentProject.FileList}" AutoGenerateColumns="False" >
             
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Path" Width="9*" Binding="{Binding CurrentFile}"/>
                 <DataGridTemplateColumn Header="Usage" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsCurrent, Mode=TwoWay}" HorizontalAlignment="Center"> </CheckBox>
+                            <CheckBox IsChecked="{Binding IsCurrent, Mode=TwoWay}" HorizontalAlignment="Center">
+ 
+                            </CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>                
                 </DataGridTemplateColumn>
