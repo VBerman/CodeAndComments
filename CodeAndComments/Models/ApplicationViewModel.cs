@@ -2,6 +2,7 @@
 using CodeAndComments.Windows;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,9 @@ namespace CodeAndComments.Models
             CurrentProject = new ProjectStorage();
             Templates = new ObservableCollection<Template>();
             Settings = new ObservableCollection<Setting>();
+            SavedResults = new ObservableCollection<AnalyseClass>();
             LoadTemplates();
+            LoadSavedResult();
             Template = Templates[0];
             CreateNewSettings();
 
@@ -120,13 +123,13 @@ namespace CodeAndComments.Models
         {
             Settings = new ObservableCollection<Setting>()
             {
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Classes")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Fields")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Methods")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Properties")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Comments")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Interfaces")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Structures"))
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Classes")),
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Fields")),
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Methods")),
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Properties")),
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Comments")),
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Interfaces")),
+                new Setting(Template.TemplateDetails.First(t => t.Name == "Structures"))
             };
         }
 
@@ -179,6 +182,32 @@ namespace CodeAndComments.Models
 
         }
 
+        public void LoadSavedResult()
+        {
+            CheckResultsPath();
+            SavedResults.Clear();
+            foreach (var fileName in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\Results"))
+            {
+                //need remove and fix choose files window
+                if (fileName.EndsWith(".json"))
+                {
+                    try
+                    {
+                        SavedResults.Add(JsonConvert.DeserializeObject<AnalyseClass>(File.ReadAllText(fileName)));
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Error template: " + fileName);
+                    }
+
+                }
+
+            }
+
+        }
+
+
         public void CheckTemplatePath()
         {
             bool exists = Directory.Exists(Directory.GetCurrentDirectory() + @"\Templates");
@@ -189,11 +218,30 @@ namespace CodeAndComments.Models
                 File.WriteAllText(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json", Properties.Resources.StandartJSON);
 
             }
-
-               
-
-            
         }
+
+        public void CheckResultsPath()
+        {
+            bool exists = Directory.Exists(Directory.GetCurrentDirectory() + @"\Results");
+            if (!exists)
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Results");
+                //var standardTemplate = File.Create(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json");
+                
+
+            }
+        }
+
+        private ObservableCollection<AnalyseClass> savedResults;
+
+        public ObservableCollection<AnalyseClass> SavedResults
+        {
+            get { return savedResults; }
+            set { savedResults = value;
+                OnPropertyChanged();
+            }
+        }
+
 
     }
 }
