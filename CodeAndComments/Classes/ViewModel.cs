@@ -1,6 +1,7 @@
 ﻿using CodeAndComments.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace CodeAndComments.Classes
         public ViewModel()
         {
 
+
+            
         }
 
         public static ApplicationViewModel Instance 

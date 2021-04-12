@@ -50,10 +50,15 @@
                 <Button Width="25" Height="25">+</Button>
                 <Button Margin="10 0 0 0" Width="25" Height="25">ed</Button>
             </StackPanel>
-            <ListView Grid.Row="1" Grid.ColumnSpan="2">
-                <StackPanel>
-                    <TextBlock></TextBlock>
-                </StackPanel>
+            <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Templates}" SelectedItem="{Binding Template, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--need fix it-->
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </DataTemplate>
+                        
+                </ListView.ItemTemplate>
+              
             </ListView>
         </Grid>
 
@@ -66,7 +71,8 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsUsage}" Content="{Binding CurrentTemplate.Name}"/>
+                        
+                        <CheckBox  IsChecked="{Binding IsUsage, UpdateSourceTrigger=PropertyChanged}" Content="{Binding CurrentTemplate.Name}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

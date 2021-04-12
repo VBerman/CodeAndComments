@@ -11,7 +11,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 
 namespace CodeAndComments.Models
 {
@@ -20,7 +20,11 @@ namespace CodeAndComments.Models
         public ApplicationViewModel()
         {
             CurrentProject = new ProjectStorage();
-
+            Templates = new ObservableCollection<Template>();
+            Settings = new ObservableCollection<Setting>();
+            LoadTemplates();
+            Template = Templates[0];
+            CreateNewSettings();
 
         }
 
@@ -122,7 +126,7 @@ namespace CodeAndComments.Models
                 new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Properties")),
                 new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Comments")),
                 new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Interfaces")),
-                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Structers"))
+                new Setting(Template.TemplateDetails.FirstOrDefault(t => t.Name == "Structures"))
             };
         }
 
@@ -131,7 +135,10 @@ namespace CodeAndComments.Models
         public Template Template
         {
             get { return template; }
-            set { template = value; }
+            set { 
+                template = value;
+                OnPropertyChanged();
+            }
         }
 
         private ObservableCollection<Template> templates;
@@ -147,6 +154,46 @@ namespace CodeAndComments.Models
         }
 
 
+        public void LoadTemplates()
+        {
+            CheckTemplatePath();
+            Templates.Clear();
+            foreach (var fileName in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\Templates"))
+            {
+                //need remove and fix choose files window
+                if (fileName.EndsWith(".json"))
+                {
+                    try
+                    {
+                        Templates.Add(new Template() { Path = fileName });
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Error template: " + fileName);
+                    }
+                    
+                }
+
+            }
+
+        }
+
+        public void CheckTemplatePath()
+        {
+            bool exists = Directory.Exists(Directory.GetCurrentDirectory() + @"\Templates");
+            if (!exists)
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Templates");
+                //var standardTemplate = File.Create(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json");
+                File.WriteAllText(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json", Properties.Resources.StandartJSON);
+
+            }
+
+               
+
+            
+        }
 
     }
 }
