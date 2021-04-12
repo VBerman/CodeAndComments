@@ -17,7 +17,7 @@
                 <DataGridTemplateColumn Header="Usage" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsCurrent, Mode=TwoWay}" HorizontalAlignment="Center"> </CheckBox>
+                            <CheckBox IsChecked="{Binding IsCurrent, Mode=}" HorizontalAlignment="Center"> </CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>                
                 </DataGridTemplateColumn>
