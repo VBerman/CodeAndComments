@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeAndComments.Windows" xmlns:models="clr-namespace:CodeAndComments.Models"
+
         mc:Ignorable="d"
         Title="ChooseFilesWindow" Height="450" Width="800" 
         xmlns:classes="clr-namespace:CodeAndComments.Classes"

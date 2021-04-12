@@ -25,7 +25,7 @@ namespace CodeAndComments.Models
             {
                 address = value;
                 OnPropertyChanged(nameof(Address));
-                loadFilesAddress(value);
+                LoadFilesAddress(value);
             }
         }
 
@@ -43,7 +43,7 @@ namespace CodeAndComments.Models
 
 
 
-        private void loadFilesAddress(string address)
+        private void LoadFilesAddress(string address)
         {
             FileList.Clear();
             foreach (var fileName in Directory.GetFiles(address))

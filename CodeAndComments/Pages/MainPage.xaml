@@ -58,16 +58,19 @@
         </Grid>
 
         <GroupBox Header="Settings" Grid.Row="2" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-
-                <CheckBox Margin="15 0 0 0">Classes</CheckBox>
-                <CheckBox Margin="15 0 0 0">Fields</CheckBox>
-                <CheckBox Margin="15 0 0 0">Methods</CheckBox>
-                <CheckBox Margin="15 0 0 0">Properties</CheckBox>
-                <CheckBox Margin="15 0 0 0">Comments</CheckBox>
-                <CheckBox Margin="15 0 0 0">Interfaces</CheckBox>
-                <CheckBox Margin="15 0 0 0">Structures</CheckBox>
-            </StackPanel>
+            <ListView Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" ItemsSource="{Binding Settings}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsUsage}" Content="{Binding CurrentTemplate.Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
 
         </GroupBox>
         <GroupBox Header="Saved results" Grid.Row="3" Grid.ColumnSpan="2" >

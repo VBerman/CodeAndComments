@@ -15,6 +15,8 @@ namespace CodeAndComments.Models
             isCurrent = true;
         }
 
+
+
         private string currentFile;
 
         public string CurrentFile
@@ -34,7 +36,7 @@ namespace CodeAndComments.Models
             get => isCurrent;
             set { 
                 isCurrent = value;
-                OnPropertyChanged(nameof(IsCurrent));
+                OnPropertyChanged();
             }
         }
 
