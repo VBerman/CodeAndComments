@@ -3,6 +3,8 @@ using CodeAndComments.Models;
 using CodeAndComments.Windows;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +38,12 @@ namespace CodeAndComments.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ResultPage(ViewModel.Instance.CurrentAnalyseResult));
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            File.WriteAllText(Directory.GetCurrentDirectory() + @"\Templates\NewTemplate.json", "");
+            Process.Start("notepad.exe", Directory.GetCurrentDirectory() + @"\Templates\NewTemplate.json");
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)

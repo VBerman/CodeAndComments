@@ -119,40 +119,47 @@
   </resheader>
   <data name="StandartJSON" xml:space="preserve">
     <value>[
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-    "Name":"Classes"
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Classes"
   },
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-  "Name":"Fields"
-    
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Fields"
+
   },
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-  "Name":"Methods"
-    
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Methods"
+
   },
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-  "Name":"Properties"
-    
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Properties"
+
   },
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-  "Name":"Comments"
-    
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Comments"
+
   },
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-  "Name":"Interfaces"
-    
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Interfaces"
+
   },
-  {"AllObject":"Sad",
-    "CorrectObject":Sad,
-  "Name":"Structures"
-    
+  {
+    "AllObject": "Sad",
+    "CorrectObject": "Sad",
+    "Name": "Structures"
+
   }
-  ]</value>
+]</value>
   </data>
 </root>

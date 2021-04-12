@@ -47,7 +47,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Current template" FontWeight="Bold" VerticalAlignment="Center"/>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1">
-                <Button Width="25" Height="25">+</Button>
+                <Button Width="25" Height="25" Click="Button_Click_2">+</Button>
                 <Button Margin="10 0 0 0" Width="25" Height="25">ed</Button>
             </StackPanel>
             <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Templates}" SelectedItem="{Binding Template, UpdateSourceTrigger=PropertyChanged}">

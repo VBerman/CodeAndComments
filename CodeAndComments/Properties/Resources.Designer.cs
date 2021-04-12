@@ -62,36 +62,38 @@ namespace CodeAndComments.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;:Sad,
-        ///    &quot;Name&quot;:&quot;Classes&quot;
+        ///  {
+        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;Name&quot;: &quot;Classes&quot;
         ///  },
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;:Sad,
-        ///  &quot;Name&quot;:&quot;Fields&quot;
-        ///    
+        ///  {
+        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;Name&quot;: &quot;Fields&quot;
+        ///
         ///  },
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;:Sad,
-        ///  &quot;Name&quot;:&quot;Methods&quot;
-        ///    
+        ///  {
+        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;Name&quot;: &quot;Methods&quot;
+        ///
         ///  },
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;:Sad,
-        ///  &quot;Name&quot;:&quot;Properties&quot;
-        ///    
+        ///  {
+        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;Name&quot;: &quot;Properties&quot;
+        ///
         ///  },
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;:Sad,
-        ///  &quot;Name&quot;:&quot;Comments&quot;
-        ///    
+        ///  {
+        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;Name&quot;: &quot;Comments&quot;
+        ///
         ///  },
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;:Sad,
-        ///  &quot;Name&quot;:&quot;Interfaces&quot;
-        ///    
-        ///  },
-        ///  {&quot;AllObject&quot;:&quot;Sad&quot;, [rest of string was truncated]&quot;;.
+        ///  {
+        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StandartJSON {
             get {
