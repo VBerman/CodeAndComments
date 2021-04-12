@@ -62,34 +62,36 @@ namespace CodeAndComments.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to [
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;:Sad,
         ///    &quot;Name&quot;:&quot;Classes&quot;
         ///  },
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;:Sad,
         ///  &quot;Name&quot;:&quot;Fields&quot;
         ///    
         ///  },
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;:Sad,
         ///  &quot;Name&quot;:&quot;Methods&quot;
         ///    
         ///  },
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;:Sad,
         ///  &quot;Name&quot;:&quot;Properties&quot;
         ///    
         ///  },
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;:Sad,
         ///  &quot;Name&quot;:&quot;Comments&quot;
         ///    
         ///  },
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;,
+        ///    &quot;CorrectObject&quot;:Sad,
         ///  &quot;Name&quot;:&quot;Interfaces&quot;
         ///    
         ///  },
-        ///  {&quot;Expression&quot;:&quot;Sad&quot;,
-        ///  &quot;Name&quot;:&quot;Structures&quot;
-        ///    
-        ///  }
-        ///  ].
+        ///  {&quot;AllObject&quot;:&quot;Sad&quot;, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StandartJSON {
             get {

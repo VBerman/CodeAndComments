@@ -119,30 +119,37 @@
   </resheader>
   <data name="StandartJSON" xml:space="preserve">
     <value>[
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
     "Name":"Classes"
   },
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
   "Name":"Fields"
     
   },
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
   "Name":"Methods"
     
   },
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
   "Name":"Properties"
     
   },
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
   "Name":"Comments"
     
   },
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
   "Name":"Interfaces"
     
   },
-  {"Expression":"Sad",
+  {"AllObject":"Sad",
+    "CorrectObject":Sad,
   "Name":"Structures"
     
   }

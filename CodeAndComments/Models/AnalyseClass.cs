@@ -1,12 +1,14 @@
-﻿using CodeAndComments.Models;
+﻿using CodeAndComments.Classes;
+using CodeAndComments.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace CodeAndComments.Classes
+namespace CodeAndComments.Models
 {
     public class AnalyseClass : ObservableObject
     {
@@ -14,7 +16,7 @@ namespace CodeAndComments.Classes
         {
 
         }
-        
+
 
         private int numberOfOccurences;
 
@@ -99,12 +101,35 @@ namespace CodeAndComments.Classes
             set { chooseTemplate = value; }
         }
 
+        private bool analyseNow = true;
 
-        public void StartAnalyse(ObservableCollection<Setting> settings, Template template)
+        public bool AnalyseNow
+        {
+            get { return analyseNow; }
+            set { 
+                analyseNow = !value;
+                OnPropertyChanged();
+            }
+        }
+
+        public async void StartAnalyse(ObservableCollection<Setting> settings, Template template)
         {
             Clear();
             ChooseSettings = settings;
             ChooseTemplate = template;
+            AnalyseNow = true;
+            await Task.Run(
+                () =>
+                {
+                    for (int i = 0; i < 100; i++)
+                    {
+                        Thread.Sleep(500);
+                        Process += 1;
+                    }
+                    
+                }
+            );
+            AnalyseNow = false;
 
         }
 

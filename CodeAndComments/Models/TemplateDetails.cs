@@ -8,7 +8,8 @@ namespace CodeAndComments.Models
 {
     public class TemplateDetails
     {
-        public string Expression { get; set; }
+        public string AllObject { get; set; }
+        public string CorrectObject { get; set; }
         public string Name { get; set; }
     }
 }

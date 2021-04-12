@@ -24,6 +24,7 @@ namespace CodeAndComments.Models
             Templates = new ObservableCollection<Template>();
             Settings = new ObservableCollection<Setting>();
             SavedResults = new ObservableCollection<AnalyseClass>();
+
             LoadTemplates();
             LoadSavedResult();
             Template = Templates[0];
@@ -118,6 +119,23 @@ namespace CodeAndComments.Models
         }
 
 
+        public RelayCommand analyseCommand;
+        public RelayCommand AnalyseCommand
+        {
+            get
+            {
+                return analyseCommand ??
+                    (analyseCommand = new RelayCommand(async obj =>
+                    {
+                        Analyse = new AnalyseClass();
+                        await Task.Run(()=>Analyse.StartAnalyse(Settings, Template));
+                    }
+                    ));
+            }
+        }
+
+
+
         //
         public void CreateNewSettings()
         {
@@ -208,7 +226,7 @@ namespace CodeAndComments.Models
         }
 
 
-        public void CheckTemplatePath()
+        public static void CheckTemplatePath()
         {
             bool exists = Directory.Exists(Directory.GetCurrentDirectory() + @"\Templates");
             if (!exists)
@@ -220,13 +238,13 @@ namespace CodeAndComments.Models
             }
         }
 
-        public void CheckResultsPath()
+        public static void CheckResultsPath()
         {
             bool exists = Directory.Exists(Directory.GetCurrentDirectory() + @"\Results");
             if (!exists)
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Results");
-                //var standardTemplate = File.Create(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json");
+            
                 
 
             }

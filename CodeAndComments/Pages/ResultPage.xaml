@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:CodeAndComments.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ResultPage" Margin="15">
+      Title="ResultPage" Margin="15"
+      >
 
     
     <Grid>
@@ -21,7 +22,9 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
             <TextBlock Text="Choose template"/>
-            <TextBlock Text="bind" Margin="10 0 0 0"/>
+
+            <TextBlock Text="{Binding }"/>
+
             <TextBlock Text="Choose settings" Margin="15 0 0 0"/>
             <TextBlock Text="bind" Margin="10 0 0 0"/>
         </StackPanel>
