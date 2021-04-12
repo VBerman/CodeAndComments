@@ -5,19 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeAndComments.Windows" xmlns:models="clr-namespace:CodeAndComments.Models"
         mc:Ignorable="d"
-        Title="ChooseFilesWindow" Height="450" Width="800" Closing="Window_Closing">
-    <!--<Window.DataContext>
-        <models:ApplicationViewModel></models:ApplicationViewModel>
-    </Window.DataContext>-->
+        Title="ChooseFilesWindow" Height="450" Width="800" 
+        xmlns:classes="clr-namespace:CodeAndComments.Classes"
+        DataContext="{Binding Source={x:Static classes:ViewModel.Instance}}">
+    
     <Grid>
-        <DataGrid ColumnWidth="*" ItemsSource="{Binding CurrentProject.FileList}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid ColumnWidth="*" ItemsSource="{Binding CurrentProject.FileList}" AutoGenerateColumns="False" >
             
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Path" Width="9*" Binding="{Binding CurrentFile}"/>
                 <DataGridTemplateColumn Header="Usage" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsCurrent, Mode=}" HorizontalAlignment="Center"> </CheckBox>
+                            <CheckBox IsChecked="{Binding IsCurrent, Mode=TwoWay}" HorizontalAlignment="Center">
+ 
+                            </CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>                
                 </DataGridTemplateColumn>
