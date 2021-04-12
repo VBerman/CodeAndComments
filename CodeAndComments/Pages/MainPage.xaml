@@ -32,7 +32,7 @@
             <TextBlock Text="Result:"/>
             <ProgressBar Value="{Binding Analyse.Process}" Margin="15 0 0 0" Width="125"/>
             <Button Width="75" Margin="20 0 0 0" Command="{Binding AnalyseCommand}" IsEnabled="{Binding Analyse.AnalyseNow}">Start analyse</Button>
-            <Button Width="75" Margin="20 0 0 0" IsEnabled="{Binding Analyse.AnalyseNow}">View result</Button>
+            <Button Width="75" Margin="20 0 0 0" IsEnabled="{Binding Analyse.AnalyseNow}" Click="Button_Click">View result</Button>
         </StackPanel>
         
         
@@ -92,7 +92,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock VerticalAlignment="Bottom" Text="Results" Grid.Row="0"/>
-                <ListView Width="450" Grid.Row="1" ItemsSource="{Binding SavedResults}" HorizontalAlignment="Left">
+                <ListView Width="450" Grid.Row="1" ItemsSource="{Binding SavedResults}" SelectedItem="{Binding CurrentAnalyseResult}" HorizontalAlignment="Left">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NameResult}"/>
@@ -100,7 +100,7 @@
                     </ListView.ItemTemplate>
                         
                 </ListView>
-                <Button Margin="0 10 0 0" Grid.Row="2" Width="125" Height="20" HorizontalAlignment="Left">View result</Button>
+                <Button Margin="0 10 0 0" Grid.Row="2" Width="125" Height="20" Click="Button_Click_1" HorizontalAlignment="Left">View result</Button>
                 <GroupBox Grid.Column="1" Header="Fast result" Grid.RowSpan="3">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -109,11 +109,11 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Percentage error:"/>
-                            <TextBlock Margin="10 0 0 0" Text="bind"/>
+                            <TextBlock Margin="10 0 0 0" Text="{Binding CurrentAnalyseResult.PercentOfIncorrectOccurences}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Note:"/>
-                            <TextBlock Margin="10 0 0 0" Text="bind"/>
+                            <TextBlock Margin="10 0 0 0" Text="{Binding CurrentAnalyseResult.Note}"/>
                         </StackPanel>
                         
                     </Grid>

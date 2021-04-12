@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace CodeAndComments.Models
 {
@@ -128,12 +129,26 @@ namespace CodeAndComments.Models
                     (analyseCommand = new RelayCommand(async obj =>
                     {
                         Analyse = new AnalyseClass();
-                        await Task.Run(()=>Analyse.StartAnalyse(Settings, Template));
+                        await Task.Run(()=>Analyse.StartAnalyse(new ObservableCollection<Setting>(Settings.Where(a => a.IsUsage).ToList()), Template));
                     }
                     ));
             }
         }
 
+
+        //public RelayCommand viewResultCommand;
+        //public RelayCommand ViewResultCommand
+        //{
+        //    get
+        //    {
+        //        return viewResultCommand ??
+        //            (viewResultCommand = new RelayCommand(obj =>
+        //            {
+                        
+        //            }
+        //            ));
+        //    }
+        //}
 
 
         //
@@ -259,6 +274,18 @@ namespace CodeAndComments.Models
                 OnPropertyChanged();
             }
         }
+
+        private AnalyseClass currentAnalyseResult;
+
+        public AnalyseClass CurrentAnalyseResult
+        {
+            get { return currentAnalyseResult; }
+            set {
+                currentAnalyseResult = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
     }

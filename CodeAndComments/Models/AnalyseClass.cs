@@ -1,8 +1,10 @@
 ﻿using CodeAndComments.Classes;
 using CodeAndComments.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,8 +16,19 @@ namespace CodeAndComments.Models
     {
         public AnalyseClass()
         {
-
+            ChooseSettings = new ObservableCollection<Setting>();
         }
+
+
+        public long PercentOfIncorrectOccurences
+        {
+            get
+            {
+                return NumberOfIncorrectOccurences * 100 / NumberOfOccurences;
+            }
+        }
+
+
 
 
         private int numberOfOccurences;
@@ -106,7 +119,8 @@ namespace CodeAndComments.Models
         public bool AnalyseNow
         {
             get { return analyseNow; }
-            set { 
+            set
+            {
                 analyseNow = !value;
                 OnPropertyChanged();
             }
@@ -123,12 +137,15 @@ namespace CodeAndComments.Models
                 {
                     for (int i = 0; i < 100; i++)
                     {
-                        Thread.Sleep(500);
+                        Thread.Sleep(50);
                         Process += 1;
+
                     }
-                    
+
                 }
             );
+            NumberOfIncorrectOccurences = new Random().Next(20, 35); 
+            NumberOfOccurences = new Random().Next(70, 100);
             AnalyseNow = false;
 
         }
@@ -141,7 +158,47 @@ namespace CodeAndComments.Models
             Process = 0;
         }
 
+        private bool isSaved;
 
+        public bool IsSaved
+        {
+            get { return isSaved; }
+            set { isSaved = value; }
+        }
+
+      
+
+        public string ChooseSettingsString
+        {
+            get
+            {
+                string answer = "";
+                foreach (var item in ChooseSettings.ToList())
+                {
+                    answer +=" " + item.CurrentTemplate.Name;
+                }
+                
+                return answer;
+            }
+
+        }
+        //need fix
+        public RelayCommand saveResultCommand;
+        public RelayCommand SaveResultCommand
+        {
+            get
+            {
+                return saveResultCommand ??
+                (saveResultCommand = new RelayCommand(obj =>
+                {
+                    File.WriteAllText(Directory.GetCurrentDirectory() + @"\Results\" + NameResult + ".json", JsonConvert.SerializeObject(this));
+                }
+                ));
+                
+                
+                
+            }
+        }
 
     }
 }

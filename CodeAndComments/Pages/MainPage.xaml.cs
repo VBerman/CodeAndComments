@@ -1,4 +1,5 @@
-﻿using CodeAndComments.Models;
+﻿using CodeAndComments.Classes;
+using CodeAndComments.Models;
 using CodeAndComments.Windows;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,21 @@ namespace CodeAndComments.Pages
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ResultPage(ViewModel.Instance.Analyse));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ResultPage(ViewModel.Instance.CurrentAnalyseResult));
+        }
+
         //private void Button_Click(object sender, RoutedEventArgs e)
         //{
         //    var chooseFilesWindow = new ChooseFilesWindow((ApplicationViewModel)DataContext);
         //    chooseFilesWindow.Show();
-            
+
         //}
     }
 }

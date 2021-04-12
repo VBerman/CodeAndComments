@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodeAndComments.Classes;
+using CodeAndComments.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,11 @@ namespace CodeAndComments.Pages
     /// </summary>
     public partial class ResultPage : Page
     {
-        public ResultPage()
+        public ResultPage(AnalyseClass analyse)
         {
+            DataContext = analyse;
             InitializeComponent();
+            
         }
 
         private void Back(object sender, RoutedEventArgs e)

@@ -3,12 +3,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CodeAndComments.Pages"
+      xmlns:local="clr-namespace:CodeAndComments.Pages" xmlns:classes="clr-namespace:CodeAndComments.Classes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ResultPage" Margin="15"
-      >
-
+>
+    
     
     <Grid>
         <Grid.RowDefinitions>
@@ -21,12 +21,17 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
-            <TextBlock Text="Choose template"/>
+            <TextBlock Text="Choose template:"/>
 
-            <TextBlock Text="{Binding }"/>
+            <TextBlock Text="{Binding ChooseTemplate.Name}" Margin="5 0 0 0"/>
 
-            <TextBlock Text="Choose settings" Margin="15 0 0 0"/>
-            <TextBlock Text="bind" Margin="10 0 0 0"/>
+            <TextBlock Text="Choose settings:" Margin="15 0 0 0">
+             
+                    
+            </TextBlock>
+            <TextBlock Margin="5 0 0 0" Text="{Binding ChooseSettingsString}">
+       
+            </TextBlock>
         </StackPanel>
         <Grid Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -50,11 +55,11 @@
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Percentage error:"/>
-            <TextBlock Text="bind" Margin="10 0 0 0"/>
-            <TextBlock Text="Note:"/>
-            <TextBox Text="bind" Width="125" Height="20" Margin="10 0 0 0"/>
-            <TextBlock Text="Percentage error:" Margin="15 0 0 0"/>
-            <TextBox Text="bind" Width="125" Height="20" Margin="10 0 0 0"/>
+            <TextBlock Text="{Binding PercentOfIncorrectOccurences}" Margin="10 0 0 0"/>
+            <TextBlock Text="Note:" Margin="15 0 0 0"/>
+            <TextBox Text="{Binding Note}" Width="125" Height="20" Margin="10 0 0 0"/>
+            <TextBlock Text="Name result:" Margin="15 0 0 0"/>
+            <TextBox Text="{Binding NameResult}" Width="125" Height="20" Margin="10 0 0 0"/>
             
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="15 0 0 0">
@@ -82,6 +87,6 @@
             </DataGrid>
         </StackPanel>
         <Button Width="90" Height="30" Grid.Row="2" Grid.Column="1" Click="Back" HorizontalAlignment="Left">Cancel</Button>
-        <Button Width="90" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right">Save result</Button>
+        <Button Width="90" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" Command="{Binding SaveResultCommand}">Save result</Button>
     </Grid>
 </Page>
