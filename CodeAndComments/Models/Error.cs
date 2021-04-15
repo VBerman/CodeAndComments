@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace CodeAndComments.Models
 {
@@ -21,9 +22,9 @@ namespace CodeAndComments.Models
             }
         }
 
-        private string file;
+        private FileStorage file;
 
-        public string File
+        public FileStorage File
         {
             get { return file; }
             set
@@ -41,8 +42,20 @@ namespace CodeAndComments.Models
             set
             {
                 correctly = value;
-                
+
                 OnPropertyChanged();
+            }
+        }
+
+        public string FileText
+        {
+            get
+            {
+                return System.IO.File.ReadAllText(File.CurrentFile);
+            }
+            set
+            {
+                FileText = value;
             }
         }
 

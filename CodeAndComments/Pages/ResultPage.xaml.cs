@@ -33,5 +33,12 @@ namespace CodeAndComments.Pages
         {
             NavigationService.GoBack();
         }
+
+       
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((AnalyseClass)DataContext).CurrentError = ((DataGrid)sender).CurrentItem as Error;
+        }
     }
 }

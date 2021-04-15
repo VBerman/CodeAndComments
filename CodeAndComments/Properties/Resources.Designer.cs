@@ -63,37 +63,34 @@ namespace CodeAndComments.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [
         ///  {
-        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;AllObject&quot;: &quot;(|public |static |void )class [a-z].*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;(|public |static |void )class [A-Z].*&quot;,
         ///    &quot;Name&quot;: &quot;Classes&quot;
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;AllObject&quot;: &quot;.*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
         ///    &quot;Name&quot;: &quot;Fields&quot;
         ///
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;AllObject&quot;: &quot;.*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
         ///    &quot;Name&quot;: &quot;Methods&quot;
         ///
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;AllObject&quot;: &quot;.*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
         ///    &quot;Name&quot;: &quot;Properties&quot;
         ///
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,
+        ///    &quot;AllObject&quot;: &quot;.*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
         ///    &quot;Name&quot;: &quot;Comments&quot;
         ///
-        ///  },
-        ///  {
-        ///    &quot;AllObject&quot;: &quot;Sad&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;Sad&quot;,        /// [rest of string was truncated]&quot;;.
+        ///  }, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StandartJSON {
             get {

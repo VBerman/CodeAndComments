@@ -120,43 +120,43 @@
   <data name="StandartJSON" xml:space="preserve">
     <value>[
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": "(|public |static |void )class [a-z].*",
+    "CorrectObject": "(|public |static |void )class [A-Z].*",
     "Name": "Classes"
   },
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": ".*",
+    "CorrectObject": ".*",
     "Name": "Fields"
 
   },
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": ".*",
+    "CorrectObject": ".*",
     "Name": "Methods"
 
   },
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": ".*",
+    "CorrectObject": ".*",
     "Name": "Properties"
 
   },
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": ".*",
+    "CorrectObject": ".*",
     "Name": "Comments"
 
   },
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": ".*",
+    "CorrectObject": ".*",
     "Name": "Interfaces"
 
   },
   {
-    "AllObject": "Sad",
-    "CorrectObject": "Sad",
+    "AllObject": ".*",
+    "CorrectObject": ".*",
     "Name": "Structures"
 
   }

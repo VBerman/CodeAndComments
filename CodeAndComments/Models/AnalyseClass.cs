@@ -17,6 +17,18 @@ namespace CodeAndComments.Models
         public AnalyseClass()
         {
             ChooseSettings = new ObservableCollection<Setting>();
+            Errors = new ObservableCollection<Error>();
+        }
+
+        private Error currentError;
+
+        public Error CurrentError
+        {
+            get { return currentError; }
+            set { 
+                currentError = value;
+                OnPropertyChanged();
+            }
         }
 
 
@@ -28,6 +40,13 @@ namespace CodeAndComments.Models
             }
         }
 
+        private ObservableCollection<Error> errors;
+
+        public ObservableCollection<Error> Errors
+        {
+            get { return errors; }
+            set { errors = value; }
+        }
 
 
 
@@ -126,25 +145,52 @@ namespace CodeAndComments.Models
             }
         }
 
-        public async void StartAnalyse(ObservableCollection<Setting> settings, Template template)
+        private ProjectStorage projectStorage;
+
+        public ProjectStorage ProjectStorage
+        {
+            get { return projectStorage; }
+            set
+            {
+                projectStorage = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public async void StartAnalyse(ObservableCollection<Setting> settings, Template template, ProjectStorage projectStorage)
         {
             Clear();
             ChooseSettings = settings;
             ChooseTemplate = template;
+            ProjectStorage = projectStorage;
             AnalyseNow = true;
-            await Task.Run(
-                () =>
+            foreach (var file in ProjectStorage.FileList)
+            {
+                foreach (var item in settings)
                 {
-                    for (int i = 0; i < 100; i++)
+
+                    var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, File.ReadAllText(file.CurrentFile));
+                    foreach (var errorString in errorResults)
                     {
-                        Thread.Sleep(50);
-                        Process += 1;
-
+                        Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name });
                     }
-
                 }
-            );
-            NumberOfIncorrectOccurences = new Random().Next(20, 35); 
+            };
+
+            //await Task.Run(
+            //    () =>
+            //    {
+            //        for (int i = 0; i < 100; i++)
+            //        {
+            //            Thread.Sleep(50);
+            //            Process += 1;
+
+            //        }
+
+            //    }
+            //);
+            NumberOfIncorrectOccurences = new Random().Next(20, 35);
             NumberOfOccurences = new Random().Next(70, 100);
             AnalyseNow = false;
 
@@ -166,7 +212,7 @@ namespace CodeAndComments.Models
             set { isSaved = value; }
         }
 
-      
+
 
         public string ChooseSettingsString
         {
@@ -175,9 +221,9 @@ namespace CodeAndComments.Models
                 string answer = "";
                 foreach (var item in ChooseSettings.ToList())
                 {
-                    answer +=" " + item.CurrentTemplate.Name;
+                    answer += " " + item.CurrentTemplate.Name;
                 }
-                
+
                 return answer;
             }
 
@@ -194,11 +240,24 @@ namespace CodeAndComments.Models
                     File.WriteAllText(Directory.GetCurrentDirectory() + @"\Results\" + NameResult + ".json", JsonConvert.SerializeObject(this));
                 }
                 ));
-                
-                
-                
+
+
+
             }
         }
 
+        public RelayCommand viewSolutionCode;
+        public RelayCommand ViewSolutionCode
+        {
+            get
+            {
+                return viewSolutionCode ??
+                    (viewSolutionCode = new RelayCommand(obj =>
+                    {
+
+                    }
+                    ));
+            }
+        }
     }
 }

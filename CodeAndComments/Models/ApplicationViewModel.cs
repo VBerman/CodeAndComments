@@ -28,8 +28,17 @@ namespace CodeAndComments.Models
 
             LoadTemplates();
             LoadSavedResult();
-            Template = Templates[0];
-            CreateNewSettings();
+            try
+            {
+                Template = Templates[0];
+                CreateNewSettings();
+            }
+            catch (Exception)
+            {
+
+            }
+            
+            
 
         }
 
@@ -129,7 +138,7 @@ namespace CodeAndComments.Models
                     (analyseCommand = new RelayCommand(async obj =>
                     {
                         Analyse = new AnalyseClass();
-                        await Task.Run(()=>Analyse.StartAnalyse(new ObservableCollection<Setting>(Settings.Where(a => a.IsUsage).ToList()), Template));
+                        await Task.Run(()=>Analyse.StartAnalyse(new ObservableCollection<Setting>(Settings.Where(a => a.IsUsage).ToList()), Template, CurrentProject));
                     }
                     ));
             }
