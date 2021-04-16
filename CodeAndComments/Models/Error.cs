@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace CodeAndComments.Models
 {
@@ -34,6 +35,19 @@ namespace CodeAndComments.Models
             }
         }
 
+        private string errorString;
+
+        public string ErrorString
+        {
+            get { return errorString; }
+            set
+            {
+                errorString = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private bool correctly;
 
         public bool Correctly
@@ -52,10 +66,6 @@ namespace CodeAndComments.Models
             get
             {
                 return System.IO.File.ReadAllText(File.CurrentFile);
-            }
-            set
-            {
-                FileText = value;
             }
         }
 

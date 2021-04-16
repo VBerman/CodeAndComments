@@ -45,12 +45,8 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Solution code:" VerticalAlignment="Center" Grid.Column="0"/>
-            <RichTextBox Grid.Row="1" Grid.Column="0">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text="{Binding CurrentError.FileText}"/>
-                    </Paragraph>
-                </FlowDocument>
+            <RichTextBox Grid.Row="1" Grid.Column="0" Name="SolutionRichTextBox">
+                
             </RichTextBox>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Right">
                 <Button Height="25" Width="125">Mark as not correctly</Button>

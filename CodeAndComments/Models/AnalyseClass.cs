@@ -173,23 +173,12 @@ namespace CodeAndComments.Models
                     var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, File.ReadAllText(file.CurrentFile));
                     foreach (var errorString in errorResults)
                     {
-                        Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name });
+                        Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name, ErrorString = errorString });
                     }
                 }
             };
 
-            //await Task.Run(
-            //    () =>
-            //    {
-            //        for (int i = 0; i < 100; i++)
-            //        {
-            //            Thread.Sleep(50);
-            //            Process += 1;
-
-            //        }
-
-            //    }
-            //);
+            
             NumberOfIncorrectOccurences = new Random().Next(20, 35);
             NumberOfOccurences = new Random().Next(70, 100);
             AnalyseNow = false;
