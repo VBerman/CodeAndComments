@@ -120,7 +120,7 @@
   <data name="StandartJSON" xml:space="preserve">
     <value>[
   {
-    "AllObject": "(|public |static |void )class [a-z].*",
+    "AllObject": "(public|private)( +\w+ +)?( +class +)[a-z]\w+( +:( +\w+ *,?)+)?",
     "CorrectObject": "(|public |static |void )class [A-Z].*",
     "Name": "Classes"
   },
@@ -131,8 +131,8 @@
 
   },
   {
-    "AllObject": ".*",
-    "CorrectObject": ".*",
+    "AllObject": "(public|private)( +[a-z]\w+)+\(.*\)",
+    "CorrectObject": "(public|private)( +[A-Z]\w+)+\(.*\)",
     "Name": "Methods"
 
   },
