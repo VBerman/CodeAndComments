@@ -38,7 +38,21 @@ namespace CodeAndComments.Pages
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             ((AnalyseClass)DataContext).CurrentError = ((DataGrid)sender).CurrentItem as Error;
+            var error = ((DataGrid)sender).CurrentItem as Error;
+            //SolutionRichTextBox
+            //SolutionRichTextBox.Document..Add(new Run(error.ErrorString) { Foreground = Brushes.Red });
+            //var flowDocument = new FlowDocument();
+            //var paragraph = new Paragraph();
+            //var block = new Run();
+            //block.Text = ;
+
+            //block.Foreground = Brushes.Navy;
+            //paragraph.Inlines.Add(block);
+            //flowDocument.Blocks.Add(paragraph);
         }
+
+
     }
 }
