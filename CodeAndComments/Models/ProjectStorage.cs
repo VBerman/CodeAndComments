@@ -46,13 +46,12 @@ namespace CodeAndComments.Models
         private void LoadFilesAddress(string address)
         {
             FileList.Clear();
-            foreach (var fileName in Directory.GetFiles(address))
+            foreach (var fileName in Directory.GetFiles(address, "*.cs", SearchOption.AllDirectories))
             {
                 //need remove and fix choose files window
-                if (fileName.EndsWith(".cs"))
-                {
-                    FileList.Add(new FileStorage() { CurrentFile = fileName });
-                }
+
+                FileList.Add(new FileStorage() { CurrentFile = fileName });
+            
                 
             }
         }

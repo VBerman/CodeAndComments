@@ -226,6 +226,7 @@ namespace CodeAndComments.Models
                 return saveResultCommand ??
                 (saveResultCommand = new RelayCommand(obj =>
                 {
+                    IsSaved = true;
                     File.WriteAllText(Directory.GetCurrentDirectory() + @"\Results\" + NameResult + ".json", JsonConvert.SerializeObject(this));
                 }
                 ));
@@ -234,6 +235,8 @@ namespace CodeAndComments.Models
 
             }
         }
+
+        public bool IsSaveBinding { get => !IsSaved;  }
 
         public RelayCommand viewSolutionCode;
         public RelayCommand ViewSolutionCode
@@ -248,5 +251,7 @@ namespace CodeAndComments.Models
                     ));
             }
         }
+        //add mark as correctly
+        //add mark as not correctly
     }
 }

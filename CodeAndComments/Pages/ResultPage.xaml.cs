@@ -40,7 +40,7 @@ namespace CodeAndComments.Pages
         {
             
             ((AnalyseClass)DataContext).CurrentError = ((DataGrid)sender).CurrentItem as Error;
-            var error = ((DataGrid)sender).CurrentItem as Error;
+            //var error = ((DataGrid)sender).CurrentItem as Error;
             //SolutionRichTextBox
             //SolutionRichTextBox.Document..Add(new Run(error.ErrorString) { Foreground = Brushes.Red });
             //var flowDocument = new FlowDocument();

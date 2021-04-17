@@ -40,7 +40,8 @@ namespace CodeAndComments.Models
 
         public void ConvertFromPath()
         {
-            TemplateDetails = JsonConvert.DeserializeObject<TemplateDetails[]>(File.ReadAllText(Path)); 
+            TemplateDetails = JsonConvert.DeserializeObject<TemplateDetails[]>(File.ReadAllText(Path));
+            
         }
             
 

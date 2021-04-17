@@ -46,7 +46,11 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Solution code:" VerticalAlignment="Center" Grid.Column="0"/>
             <RichTextBox Grid.Row="1" Grid.Column="0" Name="SolutionRichTextBox">
-                
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="{Binding CurrentError.ErrorString}"/>
+                    </Paragraph>
+                </FlowDocument>
             </RichTextBox>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Right">
                 <Button Height="25" Width="125">Mark as not correctly</Button>
@@ -105,6 +109,6 @@
         </StackPanel>
         
         <Button Width="90" Height="30" Margin="0 0 100 0" Grid.Row="2" Grid.Column="1" Click="Back" HorizontalAlignment="Right" >Cancel</Button>
-        <Button Width="90" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" Command="{Binding SaveResultCommand}">Save result</Button>
+        <Button Width="90" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding IsSaveBinding}" Command="{Binding SaveResultCommand}">Save result</Button>
     </Grid>
 </Page>

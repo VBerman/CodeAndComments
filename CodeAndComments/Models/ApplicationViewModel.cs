@@ -163,16 +163,20 @@ namespace CodeAndComments.Models
         //
         public void CreateNewSettings()
         {
-            Settings = new ObservableCollection<Setting>()
+            try
             {
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Classes")),
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Fields")),
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Methods")),
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Properties")),
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Comments")),
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Interfaces")),
-                new Setting(Template.TemplateDetails.First(t => t.Name == "Structures"))
-            };
+                Settings = new ObservableCollection<Setting>() { };
+                foreach (var item in this.Template.TemplateDetails)
+                {
+                    Settings.Add(new Setting(item));
+                };
+              }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error template");
+            }
+            
         }
 
         private Template template;
@@ -183,6 +187,7 @@ namespace CodeAndComments.Models
             set { 
                 template = value;
                 OnPropertyChanged();
+                CreateNewSettings();
             }
         }
 

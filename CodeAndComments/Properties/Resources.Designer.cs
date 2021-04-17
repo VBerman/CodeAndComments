@@ -63,7 +63,7 @@ namespace CodeAndComments.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [
         ///  {
-        ///    &quot;AllObject&quot;: &quot;(public|private)( +\w+ +)?( +class +)[a-z]\w+( +:( +\w+ *,?)+)?&quot;,
+        ///    &quot;AllObject&quot;: &quot;(public|private|internal)( +\\w+ +)?( +class +)[a-z]\\w+( +:( +\\w+ *,?)+)?&quot;,
         ///    &quot;CorrectObject&quot;: &quot;(|public |static |void )class [A-Z].*&quot;,
         ///    &quot;Name&quot;: &quot;Classes&quot;
         ///  },
@@ -74,17 +74,15 @@ namespace CodeAndComments.Properties {
         ///
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;(public|private)( +[a-z]\w+)+\(.*\)&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;(public|private)( +[A-Z]\w+)+\(.*\)&quot;,
+        ///    &quot;AllObject&quot;: &quot;(public|private|internal)( +[a-z]\\w+)+\\(.*\\)&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;(public|private)( +[A-Z]\\w+)+\\(.*\\)&quot;,
         ///    &quot;Name&quot;: &quot;Methods&quot;
         ///
         ///  },
         ///  {
         ///    &quot;AllObject&quot;: &quot;.*&quot;,
         ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
-        ///    &quot;Name&quot;: &quot;Properties&quot;
-        ///
-        ///  [rest of string was truncated]&quot;;.
+        ///   [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StandartJSON {
             get {

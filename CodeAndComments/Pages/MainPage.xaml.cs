@@ -46,6 +46,11 @@ namespace CodeAndComments.Pages
             Process.Start("notepad.exe", Directory.GetCurrentDirectory() + @"\Templates\NewTemplate.json");
         }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Process.Start("notepad.exe", ViewModel.Instance.Template.Path);
+        }
+
         //private void Button_Click(object sender, RoutedEventArgs e)
         //{
         //    var chooseFilesWindow = new ChooseFilesWindow((ApplicationViewModel)DataContext);
