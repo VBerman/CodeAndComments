@@ -18,6 +18,7 @@ namespace CodeAndComments.Models
         {
             ChooseSettings = new ObservableCollection<Setting>();
             Errors = new ObservableCollection<Error>();
+            AnalyseResults = new ObservableCollection<AnalyseResult>();
         }
 
         private Error currentError;
@@ -25,18 +26,19 @@ namespace CodeAndComments.Models
         public Error CurrentError
         {
             get { return currentError; }
-            set { 
+            set
+            {
                 currentError = value;
                 OnPropertyChanged();
             }
         }
 
 
-        public long PercentOfIncorrectOccurences
+        public double PercentOfIncorrectOccurences
         {
             get
             {
-                return NumberOfIncorrectOccurences * 100 / NumberOfOccurences;
+                return NumberOfIncorrectOccurences * 100 / (NumberOfOccurences + NumberOfIncorrectOccurences);
             }
         }
 
@@ -48,7 +50,17 @@ namespace CodeAndComments.Models
             set { errors = value; }
         }
 
+        private int numberOfNotResolved;
 
+        public int NumberOfNotResolved
+        {
+            get { return numberOfNotResolved; }
+            set
+            {
+                numberOfNotResolved = value;
+                OnPropertyChanged();
+            }
+        }
 
         private int numberOfOccurences;
 
@@ -165,20 +177,29 @@ namespace CodeAndComments.Models
             ChooseTemplate = template;
             ProjectStorage = projectStorage;
             AnalyseNow = true;
-            foreach (var file in ProjectStorage.FileList)
+            foreach (var item in settings)
             {
-                foreach (var item in settings)
+                var analyseResult = new AnalyseResult() { NameError = item.CurrentTemplate.Name };
+                foreach (var file in ProjectStorage.FileList)
                 {
 
-                    var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, File.ReadAllText(file.CurrentFile));
+
+                    var textFile = File.ReadAllText(file.CurrentFile);
+                    var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
                     foreach (var errorString in errorResults)
                     {
                         Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name, ErrorString = errorString });
                     }
+                    var correctResults = Parser.Parse(item.CurrentTemplate.CorrectObject, textFile);
+                    analyseResult.NotResolved += errorResults.Count();
+                    analyseResult.CountCorrect += correctResults.Count();
+                    NumberOfNotResolved += analyseResult.NotResolved;
+                    NumberOfOccurences += analyseResult.CountCorrect;
                 }
+                AnalyseResults.Add(analyseResult);
             };
 
-            
+
             NumberOfIncorrectOccurences = new Random().Next(20, 35);
             NumberOfOccurences = new Random().Next(70, 100);
             AnalyseNow = false;
@@ -237,7 +258,7 @@ namespace CodeAndComments.Models
             }
         }
 
-        public bool IsSaveBinding { get => !IsSaved;  }
+        public bool IsSaveBinding { get => !IsSaved; }
 
         public RelayCommand viewSolutionCode;
         public RelayCommand ViewSolutionCode
@@ -254,5 +275,79 @@ namespace CodeAndComments.Models
         }
         //add mark as correctly
         //add mark as not correctly
+        private RelayCommand markAsCorrectly;
+        public RelayCommand MarkAsCorrectly
+        {
+            get
+            {
+                return markAsCorrectly ??
+                    (markAsCorrectly = new RelayCommand(obj =>
+                    {
+                        if (CurrentError.Correctly == null)
+                        {
+                            CurrentError.Correctly = true;
+                            var analyseResult = AnalyseResults.FirstOrDefault(ar => CurrentError.Name == ar.NameError);
+                            analyseResult.NotResolved--;
+                            analyseResult.CountCorrect++;
+                        }
+                        
+                    }));
+            }
+        }
+
+        private RelayCommand markAsNotCorrectly;
+        public RelayCommand MarkAsNotCorrectly
+        {
+            get
+            {
+                return markAsNotCorrectly ??
+                    (markAsNotCorrectly = new RelayCommand(obj =>
+                    {
+                        if (CurrentError.Correctly == null)
+                        {
+                            CurrentError.Correctly = false;
+                            var analyseResult = AnalyseResults.FirstOrDefault(ar => CurrentError.Name == ar.NameError);
+                            analyseResult.NotResolved--;
+                            analyseResult.CountIncorrect++;
+
+                        }
+
+                    }));
+            }
+        }
+
+        private RelayCommand markAllAsNotCorrectly;
+        public RelayCommand MarkAllAsNotCorrectly
+        {
+            get
+            {
+                return markAllAsNotCorrectly ??
+                    (markAllAsNotCorrectly = new RelayCommand(obj =>
+                    {
+                        foreach (var item in Errors)
+                        {
+                            if (item.Correctly == null)
+                            {
+                                item.Correctly = false;
+                                var analyseResult = AnalyseResults.FirstOrDefault(ar => item.Name == ar.NameError);
+                                analyseResult.NotResolved--;
+                                analyseResult.CountIncorrect++;
+                                //analyseResult.GetPercentIncorrect;
+                            }
+                        }
+                        
+
+                    }));
+            }
+        }
+
+        private ObservableCollection<AnalyseResult> analyseResults;
+
+        public ObservableCollection<AnalyseResult> AnalyseResults
+        {
+            get { return analyseResults; }
+            set { analyseResults = value; }
+        }
+
     }
 }
