@@ -28,8 +28,19 @@ namespace CodeAndComments.Models
 
             LoadTemplates();
             LoadSavedResult();
-          
-            Template = Templates[0];
+
+            try
+            {
+                Template = Templates[0];
+            }
+            catch (Exception)
+            {
+
+                File.WriteAllText(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json", Properties.Resources.StandartJSON);
+                LoadTemplates();
+                Template = Templates[0];
+            }
+
             CreateNewSettings();
 
             

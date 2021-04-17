@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeAndComments" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinHeight="600" MinWidth="1000">
+        Title="{Binding ElementName=MainFrame, Path=Content.Title,StringFormat=Code and comments - {0}}" Height="450" Width="800" MinHeight="600" MinWidth="1050">
 
     <Grid>
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>

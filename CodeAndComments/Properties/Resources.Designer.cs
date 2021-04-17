@@ -68,19 +68,17 @@ namespace CodeAndComments.Properties {
         ///    &quot;Name&quot;: &quot;Classes&quot;
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;.*&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
-        ///    &quot;Name&quot;: &quot;Fields&quot;
-        ///
-        ///  },
-        ///  {
         ///    &quot;AllObject&quot;: &quot;(public|private|internal)( +[a-z]\\w+)+\\(.*\\)&quot;,
         ///    &quot;CorrectObject&quot;: &quot;(public|private|internal)( +[A-Z]\\w+)+\\(.*\\)&quot;,
         ///    &quot;Name&quot;: &quot;Methods&quot;
         ///
         ///  },
         ///  {
-        ///    &quot;Al [rest of string was truncated]&quot;;.
+        ///    &quot;AllObject&quot;: &quot; *[^:]//.*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot; *[^:]//.*&quot;,
+        ///    &quot;Name&quot;: &quot;Comments&quot;
+        ///
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StandartJSON {
             get {

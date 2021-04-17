@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:CodeAndComments.Pages" xmlns:classes="clr-namespace:CodeAndComments.Classes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ResultPage" Margin="15"
+      Title="{Binding NameResult, StringFormat=Result {0}}" Margin="15"
 >
-    
-    
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="17"/>
@@ -26,11 +26,11 @@
             <TextBlock Text="{Binding ChooseTemplate.Name}" Margin="5 0 0 0"/>
 
             <TextBlock Text="Choose settings:" Margin="15 0 0 0">
-             
-                    
+
+
             </TextBlock>
             <TextBlock Margin="5 0 0 0" Text="{Binding ChooseSettingsString}">
-       
+
             </TextBlock>
         </StackPanel>
         <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
@@ -38,7 +38,7 @@
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="8.5*"/>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
@@ -83,7 +83,7 @@
                     <Button Height="25" Width="130" Command="{Binding MarkAllAsNotCorrectly}" IsEnabled="{Binding IsSaveBinding}">Mark all as not correctly</Button>
                     <Button Height="25" Width="115" Margin="15 0 0 0" Command="{Binding MarkAsNotCorrectly}" IsEnabled="{Binding IsSaveBinding}">Mark as not correctly</Button>
                     <Button Height="25" Width="115" Margin="15 0 0 0" Command="{Binding MarkAsCorrectly}" IsEnabled="{Binding IsSaveBinding}">Mark as correctly</Button>
-                    
+
                 </StackPanel>
                 <TextBlock Text="Analyse:" Grid.Row="1"/>
                 <DataGrid Grid.Row="2" ItemsSource="{Binding AnalyseResults}" AutoGenerateColumns="False" IsReadOnly="True">
@@ -93,13 +93,13 @@
                         <DataGridTextColumn Header="Count error" Binding="{Binding CountIncorrect}"/>
                         <DataGridTextColumn Header="Count correct" Binding="{Binding CountCorrect, Mode=TwoWay}"/>
                         <DataGridTextColumn Header="Percent incorrect" Binding="{Binding GetPercentIncorrect, StringFormat={}{0:N2}%}"/>
-                        
-                        
+
+
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            
-            
+
+
             <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.7*"/>
@@ -123,14 +123,14 @@
                     <RowDefinition Height="9.3*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Errors:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom"/>
-                <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">Show not resolved</CheckBox>
-                <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Visible" IsReadOnly="True" ItemsSource="{Binding Errors}" SelectionChanged="DataGrid_SelectionChanged">
+                <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsChecked="{Binding NotResolved}">Show not resolved</CheckBox>
+                <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Visible" IsReadOnly="True" ItemsSource="{Binding ErrorsFilter}" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Error" Binding="{Binding Name}" Width="1.5*"/>
                         <DataGridTextColumn Header="File" Binding="{Binding File.CurrentFile}" Width="8.5*"/>
                         <DataGridTextColumn Header="Correct" Binding="{Binding Correctly, TargetNullValue='Not resolved'}" Width="80"/>
                     </DataGrid.Columns>
-                        
+
                 </DataGrid>
             </Grid>
             <GroupBox Header="Result" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
@@ -139,41 +139,42 @@
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="18.5"/>
+                        <ColumnDefinition Width="11.5"/>
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="66"/>
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Orientation="Horizontal">
+                    <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Orientation="Horizontal">
                         <TextBlock Text="{Binding NumberOfNotResolved, StringFormat=Not resolved: {0}}"/>
                         <TextBlock Margin="10 0 0 0" Text="{Binding NumberOfIncorrectOccurences, StringFormat=Count error: {0}}"/>
                         <TextBlock Margin="10 0 0 0" Text="{Binding NumberOfOccurences, StringFormat=Count correct: {0}}"/>
                         <TextBlock Margin="10 0 0 0" Text="{Binding PercentOfIncorrectOccurences, StringFormat=Percentage error: {0:N2}%}" />
                     </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal">
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6" Orientation="Horizontal">
                         <TextBlock Text="{Binding CountComments, StringFormat=Count comments: {0}}"/>
                     </StackPanel>
-                    <TextBlock Text="Note:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding Note}" HorizontalAlignment="Left" MinWidth="125" AcceptsReturn="True" Grid.Column="1"  Height="20" Margin="10 0 0 0" Grid.Row="2"/>
+                    <TextBlock Text="Note:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                    <TextBox Text="{Binding Note}" HorizontalAlignment="Left" MinWidth="125" AcceptsReturn="True" Grid.Column="2"  Height="20" Margin="10,3,0,2" Grid.Row="2"/>
 
-                    <TextBlock Text="Name result:" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding NameResult}" Grid.Column="4" MinWidth="125" Grid.Row="2" HorizontalAlignment="Left" Height="20" Margin="10 0 0 0"/>
-            
-                    <StackPanel HorizontalAlignment="Right" Grid.Row="3" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Bottom" >
+                    <TextBlock Text="Name result:" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="10,0,0,0"/>
+                    <TextBox Text="{Binding NameResult}" Grid.Column="5" MinWidth="125" Grid.Row="2" HorizontalAlignment="Left" Height="20" Margin="10,3,0,2"/>
+
+                    <StackPanel HorizontalAlignment="Left" Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="3" Margin="3,0,0,0" >
                         <Button Width="90" Margin="15 0 0 0" Height="30" Grid.Row="2" Grid.Column="1" Click="Back" HorizontalAlignment="Right" >Cancel</Button>
                         <Button Width="90" Margin="15 0 0 0" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding IsSaveBinding}" Command="{Binding SaveResultCommand}">Save result</Button>
                     </StackPanel>
 
                 </Grid>
             </GroupBox>
-            
+
         </Grid>
-        
-        
-        
+
+
+
     </Grid>
 </Page>

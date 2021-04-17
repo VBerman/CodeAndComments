@@ -18,8 +18,10 @@ namespace CodeAndComments.Models
         {
             ChooseSettings = new ObservableCollection<Setting>();
             Errors = new ObservableCollection<Error>();
+            ErrorsFilter = new ObservableCollection<Error>();
             Comments = new ObservableCollection<Comment>();
             AnalyseResults = new ObservableCollection<AnalyseResult>();
+            NotResolved = NotResolved;
         }
 
         private Error currentError;
@@ -67,13 +69,43 @@ namespace CodeAndComments.Models
             }
         }
 
+        private bool notResolved;
+
+        public bool NotResolved
+        {
+            get { return notResolved; }
+            set { 
+                notResolved = value;
+                if (value)
+                {
+                    ErrorsFilter = new ObservableCollection<Error>(Errors.Where(a => a.Correctly == null).ToList());
+                }
+                else
+                {
+                    ErrorsFilter = Errors;
+                }
+            }
+        }
+
+
         private ObservableCollection<Error> errors;
 
         public ObservableCollection<Error> Errors
         {
             get { return errors; }
-            set { errors = value; }
+            set {
+                errors = value;
+            }
         }
+
+        private ObservableCollection<Error> errorsFilter;
+
+        public ObservableCollection<Error> ErrorsFilter
+        {
+            get { return errorsFilter; }
+            set { errorsFilter = value; OnPropertyChanged(); }
+        }
+
         private ObservableCollection<Comment> comments;
 
         public ObservableCollection<Comment> Comments
@@ -241,16 +273,18 @@ namespace CodeAndComments.Models
                         var commentResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
                         foreach (var commentString in commentResults)
                         {
-                                Comments.Add(new Comment() { TextComment = commentString, LocationFile = file.CurrentFile });
+                            Comments.Add(new Comment() { TextComment = commentString, LocationFile = file.CurrentFile });
                         }
                     }
 
                 }
 
 
-                
+
 
             }
+
+            NotResolved = NotResolved;
             AnalyseNow = false;
         }
 
@@ -295,7 +329,7 @@ namespace CodeAndComments.Models
                 (saveResultCommand = new RelayCommand(obj =>
                 {
                     IsSaved = true;
-                    NameResult = NameResult + " " + DateTime.Now.ToString().Replace(':', '-');
+                    NameResult = NameResult + " " + DateTime.Now.ToString().Replace(':', '-').Replace('/', '.');
                     File.WriteAllText(Directory.GetCurrentDirectory() + @"\Results\" + NameResult + ".json", JsonConvert.SerializeObject(this));
                 }
                 ));
