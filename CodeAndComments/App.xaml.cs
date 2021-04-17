@@ -22,7 +22,7 @@ namespace CodeAndComments
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Something is not okay!");
+            MessageBox.Show("Error: " + e.ToString());
             e.Handled = true;
         }
 

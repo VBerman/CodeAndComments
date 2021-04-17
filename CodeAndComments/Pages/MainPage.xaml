@@ -30,7 +30,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" >
             <TextBlock Text="Result:"/>
-            <ProgressBar Value="{Binding Analyse.Process}" Margin="15 0 0 0" Width="125"/>
+            <ProgressBar Value="{Binding Analyse.Process}" Maximum="{Binding Analyse.}" Margin="15 0 0 0" Width="125"/>
             <Button Width="75" Margin="20 0 0 0" Command="{Binding AnalyseCommand}" IsEnabled="{Binding Analyse.AnalyseNow}">Start analyse</Button>
             <Button Width="75" Margin="20 0 0 0" IsEnabled="{Binding Analyse.AnalyseNow}" Click="Button_Click">View result</Button>
         </StackPanel>

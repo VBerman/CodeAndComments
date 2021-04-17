@@ -151,14 +151,25 @@ namespace CodeAndComments.Models
         }
 
 
-        private long process;
+        private int process;
 
-        public long Process
+        public int Process
         {
             get { return process; }
             set
             {
                 process = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int maxProcess;
+
+        public int MaxProcess
+        {
+            get { return maxProcess; }
+            set { 
+                maxProcess = value;
                 OnPropertyChanged();
             }
         }
@@ -241,6 +252,7 @@ namespace CodeAndComments.Models
             ChooseTemplate = template;
             ProjectStorage = projectStorage;
             AnalyseNow = true;
+            MaxProcess = settings.Count() * ProjectStorage.FileList.Count();
             // for optimization need swap foreaches
             foreach (var item in settings)
             {
@@ -254,11 +266,12 @@ namespace CodeAndComments.Models
                         foreach (var errorString in errorResults)
                         {
                             Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name, ErrorString = errorString });
-
+                            Process += 1;
                         }
                         var correctResults = Parser.Parse(item.CurrentTemplate.CorrectObject, textFile);
                         analyseResult.NotResolved += errorResults.Count();
                         analyseResult.CountCorrect += correctResults.Count();
+                        
 
                     }
                     NumberOfNotResolved += analyseResult.NotResolved;
@@ -274,10 +287,12 @@ namespace CodeAndComments.Models
                         foreach (var commentString in commentResults)
                         {
                             Comments.Add(new Comment() { TextComment = commentString, LocationFile = file.CurrentFile });
+                            Process += 1;
                         }
                     }
 
                 }
+               
 
 
 
