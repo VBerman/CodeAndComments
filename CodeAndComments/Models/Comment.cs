@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeAndComments.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeAndComments.Models
 {
-    public class Comment
+    public class Comment : ObservableObject
     {
         private string locationFile;
 
@@ -22,8 +23,11 @@ namespace CodeAndComments.Models
         public string TextComment
         {
             get { return textComment; }
-            set { 
-                textComment = value; 
+            set
+            {
+                textComment = value;
+                OnPropertyChanged();
+                
             }
         }
 

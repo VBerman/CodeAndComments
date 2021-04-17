@@ -227,6 +227,7 @@ namespace CodeAndComments.Models
                 (saveResultCommand = new RelayCommand(obj =>
                 {
                     IsSaved = true;
+                    NameResult = NameResult + " " + DateTime.Now.ToString().Replace(':', '-');
                     File.WriteAllText(Directory.GetCurrentDirectory() + @"\Results\" + NameResult + ".json", JsonConvert.SerializeObject(this));
                 }
                 ));

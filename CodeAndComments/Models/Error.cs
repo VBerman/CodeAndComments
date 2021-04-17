@@ -48,9 +48,9 @@ namespace CodeAndComments.Models
         }
 
 
-        private bool correctly;
+        private bool? correctly;
 
-        public bool Correctly
+        public bool? Correctly
         {
             get { return correctly; }
             set

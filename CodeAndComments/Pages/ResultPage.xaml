@@ -12,9 +12,9 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="8.5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="10*"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -37,78 +37,127 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="8.5*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="4.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="15"/>
-                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Solution code:" VerticalAlignment="Center" Grid.Column="0"/>
-            <RichTextBox Grid.Row="1" Grid.Column="0" Name="SolutionRichTextBox">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text="{Binding CurrentError.ErrorString}"/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
-            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-                <Button Height="25" Width="125">Mark as not correctly</Button>
-                <Button Height="25" Width="125" Margin="15 0 0 0">Mark as correctly</Button>
-            </StackPanel>
+            <Grid Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Error code:" VerticalAlignment="Bottom" Grid.Column="0"/>
+                <RichTextBox Grid.Row="2" IsReadOnly="True">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Binding CurrentError.ErrorString}"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Comment code:" VerticalAlignment="Bottom" Grid.Column="0"/>
+                <RichTextBox Grid.Row="2" IsReadOnly="True">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Binding CurrentComment.TextComment}"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
+                    <Button Height="25" Width="125">Mark as not correctly</Button>
+                    <Button Height="25" Width="125" Margin="15 0 0 0">Mark as correctly</Button>
+                </StackPanel>
+                <TextBlock Text="Analyse:" Grid.Row="1"/>
+                <DataGrid Grid.Row="2">
+                    
+                </DataGrid>
+            </Grid>
+            
+            
             <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="9.3*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1.2*"/>
-                        <RowDefinition Height="8.8*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Comments:" Grid.Row="0"/>
-                    <DataGrid AutoGenerateColumns="False" Grid.Row="1" ColumnWidth="*">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Comments"/>
-                            <DataGridTextColumn Header="Objects without comments"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1.2*"/>
-                        <RowDefinition Height="8.8*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Errors:" Grid.Row="0" Grid.Column="0"/>
-                    <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">Show not resolved</CheckBox>
-                    <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" IsReadOnly="True" ItemsSource="{Binding Errors}" SelectionChanged="DataGrid_SelectionChanged">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Error" Binding="{Binding Name}" Width="1.5*"/>
-                            <DataGridTextColumn Header="File" Binding="{Binding File.CurrentFile}" Width="8.5*"/>
-                            <DataGridCheckBoxColumn Header="Correct" Binding="{Binding Correctly}" Width="50"/>
-                        </DataGrid.Columns>
-                        
-                    </DataGrid>
-                </Grid>
-               
+                <TextBlock Text="Comments:" Grid.Row="0" VerticalAlignment="Bottom"/>
+                <DataGrid AutoGenerateColumns="False" Grid.Row="1" ColumnWidth="*">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Comments"/>
+                        <DataGridTextColumn Header="Objects without comments"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
-        </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="Percentage error:"/>
-            <TextBlock Text="{Binding PercentOfIncorrectOccurences}" Margin="10 0 0 0"/>
-            <TextBlock Text="Note:" Margin="15 0 0 0"/>
-            <TextBox Text="{Binding Note}" Width="125" Height="20" Margin="10 0 0 0"/>
-            <TextBlock Text="Name result:" Margin="15 0 0 0"/>
-            <TextBox Text="{Binding NameResult}" Width="125" Height="20" Margin="10 0 0 0"/>
+
+            <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition Height="9.3*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Errors:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom"/>
+                <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">Show not resolved</CheckBox>
+                <DataGrid AutoGenerateColumns="False" Grid.Row="1" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Visible" IsReadOnly="True" ItemsSource="{Binding Errors}" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Error" Binding="{Binding Name}" Width="1.5*"/>
+                        <DataGridTextColumn Header="File" Binding="{Binding File.CurrentFile}" Width="8.5*"/>
+                        <DataGridTextColumn Header="Correct" Binding="{Binding Correctly, TargetNullValue='Not resolved'}" Width="80"/>
+                    </DataGrid.Columns>
+                        
+                </DataGrid>
+            </Grid>
+            <GroupBox Header="Result" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="66"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+               
+                    <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding PercentOfIncorrectOccurences, StringFormat=Percentage error: {0:N2}%}" />
+
+                    <TextBlock Text="Note:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding Note}" HorizontalAlignment="Left" MinWidth="125" AcceptsReturn="True" Grid.Column="1"  Height="20" Margin="10 0 0 0" Grid.Row="1"/>
+
+                    <TextBlock Text="Name result:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding NameResult}" Grid.Column="4" MinWidth="125" Grid.Row="1" HorizontalAlignment="Left" Height="20" Margin="10 0 0 0"/>
             
-        </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Grid.Row="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Bottom" >
+                        <Button Width="90" Margin="15 0 0 0" Height="30" Grid.Row="2" Grid.Column="1" Click="Back" HorizontalAlignment="Right" >Cancel</Button>
+                        <Button Width="90" Margin="15 0 0 0" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding IsSaveBinding}" Command="{Binding SaveResultCommand}">Save result</Button>
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+            
+        </Grid>
         
-        <Button Width="90" Height="30" Margin="0 0 100 0" Grid.Row="2" Grid.Column="1" Click="Back" HorizontalAlignment="Right" >Cancel</Button>
-        <Button Width="90" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding IsSaveBinding}" Command="{Binding SaveResultCommand}">Save result</Button>
+        
+        
     </Grid>
 </Page>
