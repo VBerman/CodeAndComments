@@ -64,7 +64,7 @@ namespace CodeAndComments.Properties {
         ///   Looks up a localized string similar to [
         ///  {
         ///    &quot;AllObject&quot;: &quot;(public|private|internal)( +\\w+ +)?( +class +)[a-z]\\w+( +:( +\\w+ *,?)+)?&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;(|public |static |void )class [A-Z].*&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;(public|private|internal)( +\\w+ +)?( +class +)[A-Z]\\w+( +:( +\\w+ *,?)+)?&quot;,
         ///    &quot;Name&quot;: &quot;Classes&quot;
         ///  },
         ///  {
@@ -75,14 +75,12 @@ namespace CodeAndComments.Properties {
         ///  },
         ///  {
         ///    &quot;AllObject&quot;: &quot;(public|private|internal)( +[a-z]\\w+)+\\(.*\\)&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;(public|private)( +[A-Z]\\w+)+\\(.*\\)&quot;,
+        ///    &quot;CorrectObject&quot;: &quot;(public|private|internal)( +[A-Z]\\w+)+\\(.*\\)&quot;,
         ///    &quot;Name&quot;: &quot;Methods&quot;
         ///
         ///  },
         ///  {
-        ///    &quot;AllObject&quot;: &quot;.*&quot;,
-        ///    &quot;CorrectObject&quot;: &quot;.*&quot;,
-        ///   [rest of string was truncated]&quot;;.
+        ///    &quot;Al [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string StandartJSON {
             get {

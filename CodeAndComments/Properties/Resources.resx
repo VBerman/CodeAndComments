@@ -121,7 +121,7 @@
     <value>[
   {
     "AllObject": "(public|private|internal)( +\\w+ +)?( +class +)[a-z]\\w+( +:( +\\w+ *,?)+)?",
-    "CorrectObject": "(|public |static |void )class [A-Z].*",
+    "CorrectObject": "(public|private|internal)( +\\w+ +)?( +class +)[A-Z]\\w+( +:( +\\w+ *,?)+)?",
     "Name": "Classes"
   },
   {
@@ -132,7 +132,7 @@
   },
   {
     "AllObject": "(public|private|internal)( +[a-z]\\w+)+\\(.*\\)",
-    "CorrectObject": "(public|private)( +[A-Z]\\w+)+\\(.*\\)",
+    "CorrectObject": "(public|private|internal)( +[A-Z]\\w+)+\\(.*\\)",
     "Name": "Methods"
 
   },
@@ -143,8 +143,8 @@
 
   },
   {
-    "AllObject": ".*",
-    "CorrectObject": ".*",
+    "AllObject": " *[^:]//.*",
+    "CorrectObject": " *[^:]//.*",
     "Name": "Comments"
 
   },

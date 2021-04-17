@@ -18,6 +18,7 @@ namespace CodeAndComments.Models
         {
             ChooseSettings = new ObservableCollection<Setting>();
             Errors = new ObservableCollection<Error>();
+            Comments = new ObservableCollection<Comment>();
             AnalyseResults = new ObservableCollection<AnalyseResult>();
         }
 
@@ -32,13 +33,33 @@ namespace CodeAndComments.Models
                 OnPropertyChanged();
             }
         }
+        private Comment currentComment;
+
+        public Comment CurrentComment
+        {
+            get { return currentComment; }
+            set
+            {
+                currentComment = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public double PercentOfIncorrectOccurences
         {
             get
             {
-                return NumberOfIncorrectOccurences * 100 / (NumberOfOccurences + NumberOfIncorrectOccurences);
+                try
+                {
+                    return NumberOfIncorrectOccurences * 100 / (NumberOfOccurences + NumberOfIncorrectOccurences);
+                }
+                catch (Exception)
+                {
+
+                    return 0;
+                }
+
             }
         }
 
@@ -48,6 +69,13 @@ namespace CodeAndComments.Models
         {
             get { return errors; }
             set { errors = value; }
+        }
+        private ObservableCollection<Comment> comments;
+
+        public ObservableCollection<Comment> Comments
+        {
+            get { return comments; }
+            set { comments = value; }
         }
 
         private int numberOfNotResolved;
@@ -170,42 +198,69 @@ namespace CodeAndComments.Models
         }
 
 
-        public async void StartAnalyse(ObservableCollection<Setting> settings, Template template, ProjectStorage projectStorage)
+        public void StartAnalyse(ObservableCollection<Setting> settings, Template template, ProjectStorage projectStorage)
         {
             Clear();
             ChooseSettings = settings;
             ChooseTemplate = template;
             ProjectStorage = projectStorage;
             AnalyseNow = true;
+            // for optimization need swap foreaches
             foreach (var item in settings)
             {
-                var analyseResult = new AnalyseResult() { NameError = item.CurrentTemplate.Name };
-                foreach (var file in ProjectStorage.FileList)
+                if (item.CurrentTemplate.Name != "Comments")
                 {
-
-
-                    var textFile = File.ReadAllText(file.CurrentFile);
-                    var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
-                    foreach (var errorString in errorResults)
+                    var analyseResult = new AnalyseResult() { NameError = item.CurrentTemplate.Name };
+                    foreach (var file in ProjectStorage.FileList)
                     {
-                        Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name, ErrorString = errorString });
+
+
+                        var textFile = File.ReadAllText(file.CurrentFile);
+                        var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
+                        foreach (var errorString in errorResults)
+                        {
+
+
+                            Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name, ErrorString = errorString });
+
+
+                        }
+                        var correctResults = Parser.Parse(item.CurrentTemplate.CorrectObject, textFile);
+                        analyseResult.NotResolved += errorResults.Count();
+                        analyseResult.CountCorrect += correctResults.Count();
+
                     }
-                    var correctResults = Parser.Parse(item.CurrentTemplate.CorrectObject, textFile);
-                    analyseResult.NotResolved += errorResults.Count();
-                    analyseResult.CountCorrect += correctResults.Count();
                     NumberOfNotResolved += analyseResult.NotResolved;
                     NumberOfOccurences += analyseResult.CountCorrect;
+                    AnalyseResults.Add(analyseResult);
                 }
-                AnalyseResults.Add(analyseResult);
-            };
+                else
+                {
+                    foreach (var file in ProjectStorage.FileList)
+                    {
+                        var textFile = File.ReadAllText(file.CurrentFile);
+                        var commentResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
+                        foreach (var commentString in commentResults)
+                        {
+
+                            
+                                Comments.Add(new Comment() { TextComment = commentString, LocationFile = file.CurrentFile });
+                            
+                            
+                            
 
 
-            NumberOfIncorrectOccurences = new Random().Next(20, 35);
-            NumberOfOccurences = new Random().Next(70, 100);
-            AnalyseNow = false;
+                        }
 
+                    }
+
+                }
+
+
+                AnalyseNow = false;
+
+            }
         }
-
 
         private void Clear()
         {
@@ -289,8 +344,11 @@ namespace CodeAndComments.Models
                             var analyseResult = AnalyseResults.FirstOrDefault(ar => CurrentError.Name == ar.NameError);
                             analyseResult.NotResolved--;
                             analyseResult.CountCorrect++;
+                            NumberOfNotResolved--;
+                            NumberOfOccurences++;
+                            OnPropertyChanged("PercentOfIncorrectOccurences");
                         }
-                        
+
                     }));
             }
         }
@@ -309,6 +367,9 @@ namespace CodeAndComments.Models
                             var analyseResult = AnalyseResults.FirstOrDefault(ar => CurrentError.Name == ar.NameError);
                             analyseResult.NotResolved--;
                             analyseResult.CountIncorrect++;
+                            NumberOfNotResolved--;
+                            NumberOfIncorrectOccurences++;
+                            OnPropertyChanged("PercentOfIncorrectOccurences");
 
                         }
 
@@ -332,10 +393,13 @@ namespace CodeAndComments.Models
                                 var analyseResult = AnalyseResults.FirstOrDefault(ar => item.Name == ar.NameError);
                                 analyseResult.NotResolved--;
                                 analyseResult.CountIncorrect++;
+                                NumberOfNotResolved--;
+                                NumberOfIncorrectOccurences++;
+                                OnPropertyChanged("PercentOfIncorrectOccurences");
                                 //analyseResult.GetPercentIncorrect;
                             }
                         }
-                        
+
 
                     }));
             }
