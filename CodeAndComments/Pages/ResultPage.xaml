@@ -68,7 +68,7 @@
                 <RichTextBox Grid.Row="2" IsReadOnly="True">
                     <FlowDocument>
                         <Paragraph>
-                            <Run Text="{Binding CurrentComment.TextComment}"/>
+                            <Run Text="{Binding CurrentComment.TextFile, Mode=OneWay}"/>
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
@@ -106,7 +106,7 @@
                     <RowDefinition Height="9.3*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Comments:" Grid.Row="0" VerticalAlignment="Bottom"/>
-                <DataGrid AutoGenerateColumns="False" Grid.Row="1" ColumnWidth="*" ItemsSource="{Binding Comments}">
+                <DataGrid AutoGenerateColumns="False" Grid.Row="1" ColumnWidth="*" SelectedItem="{Binding CurrentComment}" ItemsSource="{Binding Comments}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Comment" Binding="{Binding TextComment}"/>
                     </DataGrid.Columns>
@@ -136,7 +136,8 @@
             <GroupBox Header="Result" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
@@ -153,13 +154,16 @@
                         <TextBlock Margin="10 0 0 0" Text="{Binding NumberOfOccurences, StringFormat=Count correct: {0}}"/>
                         <TextBlock Margin="10 0 0 0" Text="{Binding PercentOfIncorrectOccurences, StringFormat=Percentage error: {0:N2}%}" />
                     </StackPanel>
-                    <TextBlock Text="Note:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding Note}" HorizontalAlignment="Left" MinWidth="125" AcceptsReturn="True" Grid.Column="1"  Height="20" Margin="10 0 0 0" Grid.Row="1"/>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Orientation="Horizontal">
+                        <TextBlock Text="{Binding CountComments, StringFormat=Count comments: {0}}"/>
+                    </StackPanel>
+                    <TextBlock Text="Note:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding Note}" HorizontalAlignment="Left" MinWidth="125" AcceptsReturn="True" Grid.Column="1"  Height="20" Margin="10 0 0 0" Grid.Row="2"/>
 
-                    <TextBlock Text="Name result:" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
-                    <TextBox Text="{Binding NameResult}" Grid.Column="4" MinWidth="125" Grid.Row="1" HorizontalAlignment="Left" Height="20" Margin="10 0 0 0"/>
+                    <TextBlock Text="Name result:" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding NameResult}" Grid.Column="4" MinWidth="125" Grid.Row="2" HorizontalAlignment="Left" Height="20" Margin="10 0 0 0"/>
             
-                    <StackPanel HorizontalAlignment="Right" Grid.Row="2" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Bottom" >
+                    <StackPanel HorizontalAlignment="Right" Grid.Row="3" Grid.ColumnSpan="5" Orientation="Horizontal" VerticalAlignment="Bottom" >
                         <Button Width="90" Margin="15 0 0 0" Height="30" Grid.Row="2" Grid.Column="1" Click="Back" HorizontalAlignment="Right" >Cancel</Button>
                         <Button Width="90" Margin="15 0 0 0" Height="30" Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding IsSaveBinding}" Command="{Binding SaveResultCommand}">Save result</Button>
                     </StackPanel>

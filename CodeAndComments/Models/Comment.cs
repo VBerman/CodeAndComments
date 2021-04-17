@@ -1,6 +1,7 @@
 ﻿using CodeAndComments.Classes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace CodeAndComments.Models
             set { locationFile = value; }
         }
 
+        public string TextFile { get => File.ReadAllText(LocationFile); }
 
         private string textComment;
 

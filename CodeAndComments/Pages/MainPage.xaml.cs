@@ -37,7 +37,15 @@ namespace CodeAndComments.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ResultPage(ViewModel.Instance.CurrentAnalyseResult));
+            if (ViewModel.Instance.CurrentAnalyseResult == null)
+            {
+                MessageBox.Show("Choose analyse result");
+            }
+            else
+            {
+                NavigationService.Navigate(new ResultPage(ViewModel.Instance.CurrentAnalyseResult.Analyse));
+            }
+            
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

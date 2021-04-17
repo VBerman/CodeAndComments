@@ -95,7 +95,7 @@
                 <ListView Width="450" Grid.Row="1" ItemsSource="{Binding SavedResults}" SelectedItem="{Binding CurrentAnalyseResult}" HorizontalAlignment="Left">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding NameResult}"/>
+                            <TextBlock Text="{Binding Name}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                         
@@ -109,11 +109,11 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Percentage error:"/>
-                            <TextBlock Margin="10 0 0 0" Text="{Binding CurrentAnalyseResult.PercentOfIncorrectOccurences}"/>
+                            <TextBlock Margin="10 0 0 0" Text="{Binding CurrentAnalyseResult.Analyse.PercentOfIncorrectOccurences}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Note:"/>
-                            <TextBlock Margin="10 0 0 0" Text="{Binding CurrentAnalyseResult.Note}"/>
+                            <TextBlock Margin="10 0 0 0" Text="{Binding CurrentAnalyseResult.Analyse.Note}"/>
                         </StackPanel>
                         
                     </Grid>

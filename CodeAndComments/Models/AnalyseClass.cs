@@ -33,6 +33,10 @@ namespace CodeAndComments.Models
                 OnPropertyChanged();
             }
         }
+
+        public int CountComments { get => Comments.Count(); }
+
+
         private Comment currentComment;
 
         public Comment CurrentComment
@@ -213,16 +217,11 @@ namespace CodeAndComments.Models
                     var analyseResult = new AnalyseResult() { NameError = item.CurrentTemplate.Name };
                     foreach (var file in ProjectStorage.FileList)
                     {
-
-
                         var textFile = File.ReadAllText(file.CurrentFile);
                         var errorResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
                         foreach (var errorString in errorResults)
                         {
-
-
                             Errors.Add(new Error() { File = file, Name = item.CurrentTemplate.Name, ErrorString = errorString });
-
 
                         }
                         var correctResults = Parser.Parse(item.CurrentTemplate.CorrectObject, textFile);
@@ -242,24 +241,17 @@ namespace CodeAndComments.Models
                         var commentResults = Parser.Parse(item.CurrentTemplate.AllObject, textFile);
                         foreach (var commentString in commentResults)
                         {
-
-                            
                                 Comments.Add(new Comment() { TextComment = commentString, LocationFile = file.CurrentFile });
-                            
-                            
-                            
-
-
                         }
-
                     }
 
                 }
 
 
-                AnalyseNow = false;
+                
 
             }
+            AnalyseNow = false;
         }
 
         private void Clear()

@@ -24,21 +24,18 @@ namespace CodeAndComments.Models
             CurrentProject = new ProjectStorage();
             Templates = new ObservableCollection<Template>();
             Settings = new ObservableCollection<Setting>();
-            SavedResults = new ObservableCollection<AnalyseClass>();
+            SavedResults = new ObservableCollection<ViewAnalyseClass>();
 
             LoadTemplates();
             LoadSavedResult();
-            try
-            {
-                Template = Templates[0];
-                CreateNewSettings();
-            }
-            catch (Exception)
-            {
+          
+            Template = Templates[0];
+            CreateNewSettings();
 
-            }
             
-            
+      
+
+
 
         }
 
@@ -138,7 +135,7 @@ namespace CodeAndComments.Models
                     (analyseCommand = new RelayCommand(async obj =>
                     {
                         Analyse = new AnalyseClass();
-                        await Task.Run(()=>Analyse.StartAnalyse(new ObservableCollection<Setting>(Settings.Where(a => a.IsUsage).ToList()), Template, CurrentProject));
+                        await Task.Run(() => Analyse.StartAnalyse(new ObservableCollection<Setting>(Settings.Where(a => a.IsUsage).ToList()), Template, CurrentProject));
                     }
                     ));
             }
@@ -153,7 +150,7 @@ namespace CodeAndComments.Models
         //        return viewResultCommand ??
         //            (viewResultCommand = new RelayCommand(obj =>
         //            {
-                        
+
         //            }
         //            ));
         //    }
@@ -170,13 +167,13 @@ namespace CodeAndComments.Models
                 {
                     Settings.Add(new Setting(item));
                 };
-              }
+            }
             catch (Exception)
             {
 
                 MessageBox.Show("Error template");
             }
-            
+
         }
 
         private Template template;
@@ -184,7 +181,8 @@ namespace CodeAndComments.Models
         public Template Template
         {
             get { return template; }
-            set { 
+            set
+            {
                 template = value;
                 OnPropertyChanged();
                 CreateNewSettings();
@@ -222,33 +220,36 @@ namespace CodeAndComments.Models
 
                         MessageBox.Show("Error template: " + fileName);
                     }
-                    
+
                 }
 
             }
 
         }
 
+
+
+
         public void LoadSavedResult()
         {
             CheckResultsPath();
             SavedResults.Clear();
-            foreach (var fileName in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\Results"))
+            var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory() + @"\Results");
+            foreach (var file in directoryInfo.GetFiles("*.json"))
             {
                 //need remove and fix choose files window
-                if (fileName.EndsWith(".json"))
+
+                try
                 {
-                    try
-                    {
-                        SavedResults.Add(JsonConvert.DeserializeObject<AnalyseClass>(File.ReadAllText(fileName)));
-                    }
-                    catch (Exception)
-                    {
-
-                        MessageBox.Show("Error template: " + fileName);
-                    }
-
+                    SavedResults.Add(new ViewAnalyseClass() { Name = file.Name, FilePath = file.FullName });
                 }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Error template: " + file.Name);
+                }
+
+
 
             }
 
@@ -258,7 +259,8 @@ namespace CodeAndComments.Models
         public static void CheckTemplatePath()
         {
             bool exists = Directory.Exists(Directory.GetCurrentDirectory() + @"\Templates");
-            if (!exists)
+
+            if (!exists || !File.Exists(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json"))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Templates");
                 //var standardTemplate = File.Create(Directory.GetCurrentDirectory() + @"\Templates\StandardTemplate.json");
@@ -273,28 +275,31 @@ namespace CodeAndComments.Models
             if (!exists)
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Results");
-            
-                
+
+
 
             }
         }
 
-        private ObservableCollection<AnalyseClass> savedResults;
+        private ObservableCollection<ViewAnalyseClass> savedResults;
 
-        public ObservableCollection<AnalyseClass> SavedResults
+        public ObservableCollection<ViewAnalyseClass> SavedResults
         {
             get { return savedResults; }
-            set { savedResults = value;
+            set
+            {
+                savedResults = value;
                 OnPropertyChanged();
             }
         }
 
-        private AnalyseClass currentAnalyseResult;
+        private ViewAnalyseClass currentAnalyseResult;
 
-        public AnalyseClass CurrentAnalyseResult
+        public ViewAnalyseClass CurrentAnalyseResult
         {
             get { return currentAnalyseResult; }
-            set {
+            set
+            {
                 currentAnalyseResult = value;
                 OnPropertyChanged();
             }
